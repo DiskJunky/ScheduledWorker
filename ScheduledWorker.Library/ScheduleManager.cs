@@ -1,22 +1,13 @@
-﻿// <copyright company="Eric O'Sullivan">
-// Copyright (c) 2016 All Right Reserved
-//
-// THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
-// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// </copyright>
-
-using ScheduledWorker.Library.Schedule;
-
-namespace ScheduledWorker.Library
+﻿namespace ScheduledWorker.Library
 {
     using System;
     using System.Collections.Generic;
     using System.Configuration;
     using System.Threading;
-    using NLog;
+    using Configuration;
+    using Contracts.Logging;
+    using Contracts.Schedule;
+    using Logging;
 
     /// <summary>
     /// This class loads the schedule and configured tasks and makes them available
@@ -24,13 +15,6 @@ namespace ScheduledWorker.Library
     /// </summary>
     public class ScheduleManager : IScheduleManager
     {
-        #region NLog instance
-        /// <summary>
-        /// The single instance of an NLog LogManager for this class.
-        /// </summary>
-        private static Logger _logger = LogManager.GetCurrentClassLogger();
-        #endregion
-
         #region Private Variables
         /// <summary>
         /// This contains a map of the various Activities (Actions) we carry out on a scheduled basis 
@@ -44,14 +28,29 @@ namespace ScheduledWorker.Library
         /// Holds whether or not the schedule manager should be running.
         /// </summary>
         private bool _canRun = true;
+
+        /// <summary>
+        /// The logger instance to use for logging anything.
+        /// </summary>
+        private readonly ILogger _logger;
         #endregion
 
-        #region Lifetime Management
+        #region Lifetime Management        
         /// <summary>
-        /// This instantiates the object.
+        /// Initializes a new instance of the <see cref="ScheduleManager"/> class.
         /// </summary>
         public ScheduleManager()
         {
+            _logger = new NoLogger();
+        }
+
+        /// <summary>
+        /// This instantiates the object.
+        /// </summary>
+        /// <param name="logger">The logging instance to use for logging.</param>
+        public ScheduleManager(ILogger logger)
+        {
+            _logger = logger;
         }
         #endregion
 
@@ -64,13 +63,21 @@ namespace ScheduledWorker.Library
         #endregion
 
         #region Public Methods
+
+        ISchedule IScheduleManager.Schedule { get; }
+
         /// <summary>
         /// This initializes the schedule and loads the details from the application's configuration.
         /// </summary>
         public void Initialize()
         {
             System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            Schedule = (ScheduleSection)config.Sections[ScheduleSection.ScheduleSectionKey];
+            Schedule = (ISchedule)config.Sections[ScheduleSection.ScheduleSectionKey];
+        }
+
+        bool IScheduleManager.RunTask(IScheduleItem scheduledItem, bool throwExceptions)
+        {
+            return RunTask(scheduledItem, throwExceptions);
         }
 
         /// <summary>
@@ -105,13 +112,13 @@ namespace ScheduledWorker.Library
 
                 // this is deliberately broken to highlight attention. The line below
                 // is invalid because the LastRun time should be managed by the scheduler.
-                scheduledItem.LastRun = DateTime.Now;
-                success = scheduledItem.Task.DoWork();
+                scheduledItem.LastRunUtc = DateTime.UtcNow;
+                success = ((IWorkerTask) scheduledItem.Task).DoWork();
             }
             catch (Exception ex)
             {
                 // log and determine if we need to rethrow.
-                _logger.ErrorException(string.Format("Task [{0}] threw an exception.", taskName), ex);
+                _logger.Error(ex, "Task [{0}] threw an exception.", taskName);
                 if (throwExceptions)
                 {
                     throw;
@@ -138,23 +145,25 @@ namespace ScheduledWorker.Library
                 _logger.Debug("Starting scheduled task check...");
                 DateTime loopStartTick = DateTime.Now;
 
-                // do all runNow tasks on each tick
-                CheckScheduledItems(Schedule.RunNow);
-                CheckScheduledItems(Schedule.Daily);
-                CheckScheduledItems(Schedule.Weekly);
-                CheckScheduledItems(Schedule.Monthly);
+                // TODO: code seem to be an out of date copy... need to investigate correct classes that
+                //       should be referenced to get this working...
+                //// do all runNow tasks on each tick
+                //CheckScheduledItems(Schedule.RunNow);
+                //CheckScheduledItems(Schedule.Daily);
+                //CheckScheduledItems(Schedule.Weekly);
+                //CheckScheduledItems(Schedule.Monthly);
 
-                // any action may have taken longer than the interval to run. Calculate how long
-                // in milliseconds we need to sleep the current thread for
-                _logger.Debug("Finished scheduled task check.");
-                TimeSpan executeTime = DateTime.Now.Subtract(loopStartTick);
-                if (executeTime.Seconds < Schedule.Interval)
-                {
-                    int sleepMilliseconds = (Schedule.Interval*1000) - executeTime.Milliseconds;
-                    _logger.Trace("Scheduled task loop took [{0:F3}] seconds. Sleeping until next interval...",
-                                  ((float)executeTime.Milliseconds / 1000));
-                    Thread.Sleep(sleepMilliseconds);
-                }
+                //// any action may have taken longer than the interval to run. Calculate how long
+                //// in milliseconds we need to sleep the current thread for
+                //_logger.Debug("Finished scheduled task check.");
+                //TimeSpan executeTime = DateTime.Now.Subtract(loopStartTick);
+                //if (executeTime.Seconds < Schedule.Interval)
+                //{
+                //    int sleepMilliseconds = (Schedule.Interval*1000) - executeTime.Milliseconds;
+                //    _logger.Trace("Scheduled task loop took [{0:F3}] seconds. Sleeping until next interval...",
+                //                  ((float)executeTime.Milliseconds / 1000));
+                //    Thread.Sleep(sleepMilliseconds);
+                //}
             }
             
             _logger.Info("Scheduled tasks have finished running.");
@@ -191,10 +200,12 @@ namespace ScheduledWorker.Library
         /// <param name="scheduledItem">The scheduled item.</param>
         private void RunIfTriggered(BaseScheduleItem scheduledItem)
         {
-            if (scheduledItem.ShouldRun(DateTime.Now, Schedule.Interval))
-            {
-                RunTask(scheduledItem);
-            }
+            // TODO: locate correct code for identifying the interval...
+
+            //if (scheduledItem.ShouldRun(DateTime.Now, Schedule.Interval))
+            //{
+            //    RunTask(scheduledItem);
+            //}
         }
         #endregion
     }

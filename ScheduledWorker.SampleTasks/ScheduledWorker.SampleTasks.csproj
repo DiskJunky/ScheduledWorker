@@ -31,8 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
-    <Reference Include="NLog.Extended, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,9 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoSomethingElseTask.cs" />
+    <Compile Include="DoSomethingTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScheduledWorker.Library.Contracts\ScheduledWorker.Library.Contracts.csproj">
+      <Project>{58345577-3051-44E1-8821-064440D2319B}</Project>
+      <Name>ScheduledWorker.Library.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScheduledWorker.Library\ScheduledWorker.Library.csproj">
       <Project>{C77D3782-A3CF-4FE1-AFF0-E0C98E218105}</Project>
       <Name>ScheduledWorker.Library</Name>

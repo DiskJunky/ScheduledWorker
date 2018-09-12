@@ -1,23 +1,14 @@
-﻿// <copyright company="Eric O'Sullivan">
-// Copyright (c) 2016 All Right Reserved
-//
-// THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
-// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// </copyright>
-
-namespace ScheduledWorker.Library.Configuration
+﻿namespace ScheduledWorker.Library.Configuration
 {
     using System.Collections.Generic;
     using System.Configuration;
     using Contracts;
+    using Contracts.Schedule;
 
     /// <summary>
     /// This class determines the configuration section for a schedule.
     /// </summary>
-    public class ScheduleSection : ConfigurationSection, IScheduleConfigurationSection
+    public class ScheduleSection : ConfigurationSection//, IScheduleConfigurationSection
     {
         #region Configuration Section Keys
         /// <summary>
@@ -82,7 +73,7 @@ namespace ScheduledWorker.Library.Configuration
         [ConfigurationProperty(RunNowScheduleSectionKey)]
         public RunNowScheduleCollection RunNow => (RunNowScheduleCollection)base[RunNowScheduleSectionKey];
 
-        IList<IScheduleItem> IScheduleConfigurationSection.Daily => throw new System.NotImplementedException();
+        //IList<IScheduleItem> IScheduleConfigurationSection.Daily => throw new System.NotImplementedException();
         #endregion
     }
 }

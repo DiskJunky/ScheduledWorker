@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledWorker.Library.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledWorker.Library.Mocks", "ScheduledWorker.Library.Mocks\ScheduledWorker.Library.Mocks.csproj", "{D4606218-A2B2-4729-9D0C-686C29E7BAA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledWorker.Library.Logging", "ScheduledWorker.Library.Logging\ScheduledWorker.Library.Logging.csproj", "{DBA1350F-024B-41AF-8645-56C158D13703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledWorker.Library.Contracts", "ScheduledWorker.Library.Contracts\ScheduledWorker.Library.Contracts.csproj", "{58345577-3051-44E1-8821-064440D2319B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{D4606218-A2B2-4729-9D0C-686C29E7BAA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4606218-A2B2-4729-9D0C-686C29E7BAA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4606218-A2B2-4729-9D0C-686C29E7BAA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBA1350F-024B-41AF-8645-56C158D13703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA1350F-024B-41AF-8645-56C158D13703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBA1350F-024B-41AF-8645-56C158D13703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA1350F-024B-41AF-8645-56C158D13703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58345577-3051-44E1-8821-064440D2319B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58345577-3051-44E1-8821-064440D2319B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58345577-3051-44E1-8821-064440D2319B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58345577-3051-44E1-8821-064440D2319B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,21 +1,20 @@
-
-using ScheduledWorker.Library.Schedule;
-
 namespace ScheduledWorker.Library.Worker
 {
     using Contracts;
-    using NLog;
+    using Contracts.Logging;
+    using Contracts.Schedule;
+    using Logging;
 
     /// <summary>
     /// This class provides common logic for worker tasks.
     /// </summary>
     public abstract class BaseWorkerTask : IWorkerTask
     {
-        #region NLog instance
+        #region Protected Members        
         /// <summary>
-        /// The single instance of an NLog LogManager for this class.
+        /// The logger instance to use.
         /// </summary>
-        protected Logger _logger = LogManager.GetCurrentClassLogger();
+        protected readonly ILogger _logger;
         #endregion
 
         #region Constructor
@@ -24,6 +23,16 @@ namespace ScheduledWorker.Library.Worker
         /// </summary>
         protected BaseWorkerTask()
         {
+            _logger = new NoLogger();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseWorkerTask"/> class.
+        /// </summary>
+        /// <param name="logger">The logger to use for logging.</param>
+        protected BaseWorkerTask(ILogger logger)
+        {
+            _logger = logger;
         }
         #endregion
 

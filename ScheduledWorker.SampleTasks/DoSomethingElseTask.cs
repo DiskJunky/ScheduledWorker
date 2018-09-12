@@ -1,15 +1,6 @@
-﻿// <copyright company="Eric O'Sullivan">
-// Copyright (c) 2016 All Right Reserved
-//
-// THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
-// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// </copyright>
-
-namespace ScheduledWorker.SampleTasks
+﻿namespace ScheduledWorker.SampleTasks
 {
+    using Library.Contracts.Logging;
     using Library.Worker;
 
     /// <summary>
@@ -17,6 +8,14 @@ namespace ScheduledWorker.SampleTasks
     /// </summary>
     public class DoSomethingElseTask : BaseWorkerTask
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DoSomethingElseTask"/> class.
+        /// </summary>
+        /// <param name="logger">The logger to use for logging.</param>
+        public DoSomethingElseTask(ILogger logger) : base(logger)
+        {
+        }
+
         /// <summary>
         /// Perform the task and write out a message to the window.
         /// </summary>

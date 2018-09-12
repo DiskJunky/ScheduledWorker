@@ -1,18 +1,9 @@
-﻿// <copyright company="Eric O'Sullivan">
-// Copyright (c) 2016 All Right Reserved
-//
-// THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
-// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// </copyright>
-
-namespace ScheduledWorker.Library.Configuration
+﻿namespace ScheduledWorker.Library.Configuration
 {
     using System;
     using System.Configuration;
     using Contracts;
+    using Contracts.Schedule;
 
     /// <summary>
     /// Holds the details for a single weekly schedule.
@@ -32,7 +23,6 @@ namespace ScheduledWorker.Library.Configuration
         /// </summary>
         [ConfigurationProperty(DayKey, DefaultValue = DayOfWeek.Monday, IsRequired = true)]
         public DayOfWeek Day => (DayOfWeek)base[DayKey];
-
         #endregion
 
         #region Public Methods

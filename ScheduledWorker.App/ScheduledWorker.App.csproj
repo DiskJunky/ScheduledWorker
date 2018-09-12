@@ -38,8 +38,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
-    <Reference Include="NLog.Extended, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -70,6 +68,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScheduledWorker.Library.Contracts\ScheduledWorker.Library.Contracts.csproj">
+      <Project>{58345577-3051-44E1-8821-064440D2319B}</Project>
+      <Name>ScheduledWorker.Library.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScheduledWorker.Library.Logging\ScheduledWorker.Library.Logging.csproj">
+      <Project>{DBA1350F-024B-41AF-8645-56C158D13703}</Project>
+      <Name>ScheduledWorker.Library.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScheduledWorker.Library\ScheduledWorker.Library.csproj">
       <Project>{c77d3782-a3cf-4fe1-aff0-e0c98e218105}</Project>
       <Name>ScheduledWorker.Library</Name>

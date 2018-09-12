@@ -31,8 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
-    <Reference Include="NLog.Extended, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -43,6 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\BaseScheduleCollection.cs" />
+    <Compile Include="Configuration\BaseScheduleItem.cs" />
+    <Compile Include="Configuration\Daily\DailyScheduleCollection.cs" />
+    <Compile Include="Configuration\Daily\DailyScheduleItem.cs" />
+    <Compile Include="Configuration\Monthly\MonthlyScheduleCollection.cs" />
+    <Compile Include="Configuration\Monthly\MonthlyScheduleItem.cs" />
+    <Compile Include="Configuration\RunNow\RunNowScheduleCollection.cs" />
+    <Compile Include="Configuration\RunNow\RunNowScheduleItem.cs" />
+    <Compile Include="Configuration\ScheduleSection.cs" />
+    <Compile Include="Configuration\Weekly\WeeklyScheduleCollection.cs" />
+    <Compile Include="Configuration\Weekly\WeeklyScheduleItem.cs" />
+    <Compile Include="Configuration\WorkerTaskConverter.cs" />
     <Compile Include="Contracts\Schedule\IDailyScheduleItem.cs" />
     <Compile Include="Contracts\Intervals\IInterval.cs" />
     <Compile Include="Contracts\Schedule\IMonthlyScheduleItem.cs" />
@@ -50,6 +60,7 @@
     <Compile Include="Contracts\Schedule\ISchedule.cs" />
     <Compile Include="Contracts\Schedule\IScheduleSettings.cs" />
     <Compile Include="Contracts\Schedule\IWeeklyScheduleItem.cs" />
+    <Compile Include="Contracts\WorkerTaskEventArgs.cs" />
     <Compile Include="Core\Intervals\BaseInterval.cs" />
     <Compile Include="Core\Intervals\MinuteInterval.cs" />
     <Compile Include="Core\Intervals\SecondInterval.cs" />
@@ -58,10 +69,21 @@
     <Compile Include="Contracts\Schedule\IScheduleItem.cs" />
     <Compile Include="Contracts\Schedule\IWorkerTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleManager.cs" />
+    <Compile Include="Worker\BaseWorkerTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Schedule\" />
-    <Folder Include="Worker\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScheduledWorker.Library.Contracts\ScheduledWorker.Library.Contracts.csproj">
+      <Project>{58345577-3051-44e1-8821-064440d2319b}</Project>
+      <Name>ScheduledWorker.Library.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScheduledWorker.Library.Logging\ScheduledWorker.Library.Logging.csproj">
+      <Project>{dba1350f-024b-41af-8645-56c158d13703}</Project>
+      <Name>ScheduledWorker.Library.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,4 @@
-﻿
-namespace ScheduledWorker.Library.Configuration
+﻿namespace ScheduledWorker.Library.Configuration
 {
     using System;
     using System.Collections.Generic;
@@ -8,6 +7,8 @@ namespace ScheduledWorker.Library.Configuration
     using System.IO;
     using System.Reflection;
     using Contracts;
+    using Contracts.Logging;
+    using Contracts.Schedule;
 
     /// <summary>
     /// This class is used to help convert a configuration setting value into a concrete
@@ -15,11 +16,11 @@ namespace ScheduledWorker.Library.Configuration
     /// </summary>
     internal class WorkerTaskConverter : TypeConverter
     {
-        #region NLog
+        #region Private Members        
         /// <summary>
-        /// Holds the logging instance to use for logging purposes.
+        /// Holds a reference to the logging instance.
         /// </summary>
-        private NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger(typeof (NLog.Logger));
+        private readonly ILogger _logger;
         #endregion
 
         #region TypeConverter Overrides
@@ -187,7 +188,7 @@ namespace ScheduledWorker.Library.Configuration
                 catch (Exception ex)
                 {
                     // log but otherwise ignore any errors
-                    _logger.WarnException(string.Format("There was a problem loading assembly [{0}]", filePath), ex);
+                    _logger.Warn(ex, "There was a problem loading assembly [{0}]", filePath);
                 }
             }
 
