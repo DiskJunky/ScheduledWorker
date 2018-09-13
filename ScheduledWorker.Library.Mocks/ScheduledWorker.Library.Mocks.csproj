@@ -44,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScheduledWorker.Library.Contracts\ScheduledWorker.Library.Contracts.csproj">
+      <Project>{58345577-3051-44E1-8821-064440D2319B}</Project>
+      <Name>ScheduledWorker.Library.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScheduledWorker.Library\ScheduledWorker.Library.csproj">
       <Project>{C77D3782-A3CF-4FE1-AFF0-E0C98E218105}</Project>
       <Name>ScheduledWorker.Library</Name>

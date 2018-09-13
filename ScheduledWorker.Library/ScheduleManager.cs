@@ -5,6 +5,7 @@
     using System.Configuration;
     using System.Threading;
     using Configuration;
+    using Contracts;
     using Contracts.Logging;
     using Contracts.Schedule;
     using Contracts.Worker;

@@ -23,14 +23,14 @@
         /// Gets the strongly typed month that the task is configured to run on.
         /// </summary>
         [XmlIgnore]
-        public Month Month 
+        public Months Month 
         { 
             get
             {
                 // build a date string from the loaded configuration and attempt to parse it.
                 DateTime now = DateTime.Now;
                 string dateString = string.Format("{0} {1} {2}", Day, SerializedMonth, now.Year);
-                return (Month)DateTime.Parse(dateString).Month;
+                return (Months)DateTime.Parse(dateString).Month;
             }
         }
 
