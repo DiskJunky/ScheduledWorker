@@ -67,7 +67,7 @@
     <Compile Include="IScheduleManager.cs" />
     <Compile Include="Contracts\Month.cs" />
     <Compile Include="Contracts\Schedule\IScheduleItem.cs" />
-    <Compile Include="Contracts\Schedule\IWorkerTask.cs" />
+    <Compile Include="Contracts\Worker\IWorkerTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScheduleManager.cs" />
     <Compile Include="Worker\BaseWorkerTask.cs" />

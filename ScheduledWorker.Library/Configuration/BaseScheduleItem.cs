@@ -5,6 +5,7 @@
     using System.Configuration;
     using Contracts;
     using Contracts.Schedule;
+    using Contracts.Worker;
 
     /// <summary>
     /// This holds basic details about a scheduled item.

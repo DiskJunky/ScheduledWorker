@@ -9,6 +9,7 @@
     using Contracts;
     using Contracts.Logging;
     using Contracts.Schedule;
+    using Contracts.Worker;
 
     /// <summary>
     /// This class is used to help convert a configuration setting value into a concrete

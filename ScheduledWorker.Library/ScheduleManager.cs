@@ -7,6 +7,7 @@
     using Configuration;
     using Contracts.Logging;
     using Contracts.Schedule;
+    using Contracts.Worker;
     using Logging;
 
     /// <summary>

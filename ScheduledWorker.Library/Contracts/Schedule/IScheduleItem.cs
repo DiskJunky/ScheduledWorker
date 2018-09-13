@@ -12,6 +12,8 @@ using System;
 
 namespace ScheduledWorker.Library.Contracts.Schedule
 {
+    using Worker;
+
     /// <summary>
     /// This contains base details about a scheduled item.
     /// </summary>

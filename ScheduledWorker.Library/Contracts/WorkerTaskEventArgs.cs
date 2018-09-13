@@ -2,6 +2,7 @@
 {
     using System;
     using Schedule;
+    using Worker;
 
     /// <summary>
     /// This holds details about the worker event.
