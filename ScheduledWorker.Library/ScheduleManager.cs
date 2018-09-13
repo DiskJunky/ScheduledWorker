@@ -2,9 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
-    using System.Threading;
-    using Configuration;
     using Contracts;
     using Contracts.Logging;
     using Contracts.Schedule;
@@ -41,9 +38,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleManager"/> class.
         /// </summary>
-        public ScheduleManager()
+        public ScheduleManager(ISchedule schedule)
         {
             _logger = new NoLogger();
+            Schedule = schedule;
         }
 
         /// <summary>
@@ -65,16 +63,11 @@
         #endregion
 
         #region Public Methods
-
-        ISchedule IScheduleManager.Schedule { get; }
-
         /// <summary>
         /// This initializes the schedule and loads the details from the application's configuration.
         /// </summary>
         public void Initialize()
         {
-            System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            Schedule = (ISchedule)config.Sections[ScheduleSection.ScheduleSectionKey];
         }
 
         bool IScheduleManager.RunTask(IScheduleItem scheduledItem, bool throwExceptions)
@@ -185,22 +178,22 @@
         /// Checks the scheduled items should be run and runs them if so.
         /// </summary>
         /// <param name="scheduledItems">The scheduled items to check.</param>
-        private void CheckScheduledItems(IEnumerable<BaseScheduleItem> scheduledItems)
+        private void CheckScheduledItems(/*IEnumerable<BaseScheduleItem> scheduledItems*/)
         {
-            string typeName = scheduledItems.GetType().Name;
-            _logger.Trace("Checking scheduled items in [{0}]...", typeName);
-            foreach (BaseScheduleItem item in scheduledItems)
-            {
-                RunIfTriggered(item);
-            }
-            _logger.Trace("Check for [{0}] scheduled items complete.", typeName);
+            //string typeName = scheduledItems.GetType().Name;
+            //_logger.Trace("Checking scheduled items in [{0}]...", typeName);
+            //foreach (BaseScheduleItem item in scheduledItems)
+            //{
+            //    RunIfTriggered(item);
+            //}
+            //_logger.Trace("Check for [{0}] scheduled items complete.", typeName);
         }
 
         /// <summary>
         /// Runs the specified scheduled item if it's due to be triggered.
         /// </summary>
         /// <param name="scheduledItem">The scheduled item.</param>
-        private void RunIfTriggered(BaseScheduleItem scheduledItem)
+        private void RunIfTriggered(IScheduleItem scheduledItem)
         {
             // TODO: locate correct code for identifying the interval...
 

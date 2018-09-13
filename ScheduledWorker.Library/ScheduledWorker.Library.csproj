@@ -41,18 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\BaseScheduleCollection.cs" />
-    <Compile Include="Configuration\BaseScheduleItem.cs" />
-    <Compile Include="Configuration\Daily\DailyScheduleCollection.cs" />
-    <Compile Include="Configuration\Daily\DailyScheduleItem.cs" />
-    <Compile Include="Configuration\Monthly\MonthlyScheduleCollection.cs" />
-    <Compile Include="Configuration\Monthly\MonthlyScheduleItem.cs" />
-    <Compile Include="Configuration\RunNow\RunNowScheduleCollection.cs" />
-    <Compile Include="Configuration\RunNow\RunNowScheduleItem.cs" />
-    <Compile Include="Configuration\ScheduleSection.cs" />
-    <Compile Include="Configuration\Weekly\WeeklyScheduleCollection.cs" />
-    <Compile Include="Configuration\Weekly\WeeklyScheduleItem.cs" />
-    <Compile Include="Configuration\WorkerTaskConverter.cs" />
     <Compile Include="Core\Intervals\BaseInterval.cs" />
     <Compile Include="Core\Intervals\MinuteInterval.cs" />
     <Compile Include="Core\Intervals\SecondInterval.cs" />

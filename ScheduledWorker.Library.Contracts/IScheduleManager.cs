@@ -2,6 +2,9 @@
 {
     using Schedule;
 
+    /// <summary>
+    /// This interface outlines the methods required for a Schedule Manager.
+    /// </summary>
     public interface IScheduleManager
     {
         /// <summary>

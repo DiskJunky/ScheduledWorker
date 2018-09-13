@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledWorker.Library.Log
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledWorker.Library.Contracts", "ScheduledWorker.Library.Contracts\ScheduledWorker.Library.Contracts.csproj", "{58345577-3051-44E1-8821-064440D2319B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledWorker.Library.Configuration", "ScheduledWorker.Library.Configuration\ScheduledWorker.Library.Configuration.csproj", "{0AD27C30-37A4-46E2-ACCA-C1490C3E0060}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{58345577-3051-44E1-8821-064440D2319B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58345577-3051-44E1-8821-064440D2319B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58345577-3051-44E1-8821-064440D2319B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AD27C30-37A4-46E2-ACCA-C1490C3E0060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AD27C30-37A4-46E2-ACCA-C1490C3E0060}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AD27C30-37A4-46E2-ACCA-C1490C3E0060}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AD27C30-37A4-46E2-ACCA-C1490C3E0060}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
