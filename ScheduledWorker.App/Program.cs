@@ -38,6 +38,15 @@ namespace ScheduledWorker.App
                 logger.Info("Starting main");
                 logger.Debug("Exe located at '{0}'", AppDomain.CurrentDomain.BaseDirectory);
 
+                // roadmap;
+                // * Create object POCO models to allow programmatic scheule specification (rather than loading from config only)
+                // * Create component to determine if a schedule has been triggered
+                // * Unit test the hell out of everything
+                // * Verify that the scheduler is working end-to-end
+                // * Create object instantiation mechanism (currently limited to blank constructors only)
+                // * Unit test the above and retest
+
+
                 // load the custom configuration
                 var configLoader = new ConfigLoader();
                 var scheduleConfig = configLoader.LoadDefault();
