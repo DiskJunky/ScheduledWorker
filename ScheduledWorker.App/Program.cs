@@ -1,7 +1,6 @@
 namespace ScheduledWorker.App
 {
     using System;
-    using System.Collections.Generic;
     using Library;
     using Library.Contracts.Logging;
     using Library.Contracts.Schedule;
@@ -13,17 +12,6 @@ namespace ScheduledWorker.App
     /// </summary>
     class Program
     {
-        #region Private Static Variables
-        /// <summary>
-        /// This contains a map of the various Activities (Actions) we carry out on a scheduled basis 
-        /// and the date time that they were last completely checked/executed. A complete execution is
-        /// considered to have occurred when either a) No cases exist to be timed out or b) All cases
-        /// that exist were timed out, with no truncation of cases to satisfy max batch size criteria.
-        /// </summary>
-        private static Dictionary<string, DateTime> _lastCompletedRunDateTime = new Dictionary<string, DateTime>();
-        #endregion
-
-        #region Program Entry Point
         /// <summary>
         /// This sets up the program by loading the configured scheduled items and kicking them off 
         /// according to their schedule.
@@ -47,54 +35,33 @@ namespace ScheduledWorker.App
                 // * Unit test the above and retest
 
 
-                // load the custom configuration
-                //var configLoader = new ConfigLoader();
-                //var scheduleConfig = configLoader.LoadDefault();
-                //var schedule = scheduleConfig.ToSchedule();
+                // load the custom configuration....
                 ISchedule schedule = (ISchedule) null;
+
                 var momentProvider = new UtcMomentProvider();
                 ScheduleManager scheduleManager = new ScheduleManager(logger, schedule, momentProvider);
                 scheduleManager.Start();
-
-                if (Environment.UserInteractive)
-                {
-                    Console.WriteLine("\r\nPress any key to exit");
-                    Console.ReadKey();
-                }
-
-                // try and load the settings and schedule configuration
-                //Settings settings = Settings.Default;
-                // Set up user account
-                //ConfigureBDFScheduledWorkerUserAccount(settings);
-
-                //// start performing each action
-                //bool firstTimeThrough = true;
-                //while (true)
-                //{
-                //    _logger.Info("Checking for actions that are scheduled at {0}...", DateTime.Now);
-                //    scheduleManager.Start();
-
-                //    // record that we made it through our first pass of all operations
-                //    if (firstTimeThrough)
-                //    {
-                //        firstTimeThrough = false;
-                //        Settings.Default.ErrorOccurred = false;
-                //        Settings.Default.Save();
-                //    }
-
-                //    Thread.Sleep(1000);
-                //}
             }
             catch (Exception ex)
             {
                 logger.Fatal(ex, "There was an unexpected problem while running the Scheduled Worker process");
-                if (Environment.UserInteractive)
-                {
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
-                }
+            }
+            finally
+            {
+                AwaitResponse($"{Environment.NewLine}Press any key to exit");
             }
         }
-        #endregion
+
+        /// <summary>
+        /// Displays a message and waits on any user response before returning.
+        /// </summary>
+        /// <param name="message">The message to display.</param>
+        private static void AwaitResponse(string message)
+        {
+            if (!Environment.UserInteractive) return;
+
+            Console.WriteLine(message);
+            Console.ReadKey();
+        }
     }
 }
