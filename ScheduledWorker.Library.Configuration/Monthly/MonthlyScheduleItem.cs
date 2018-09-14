@@ -9,7 +9,7 @@
     /// <summary>
     /// Holds the details for a single monthly item in a daily schedule.
     /// </summary>
-    public class MonthlyScheduleItem : WeeklyScheduleItem, IMonthlyScheduleItem
+    public class MonthlyScheduleItem : DailyScheduleItem, IMonthlyScheduleItem
     {
         #region Configuration Keys
         /// <summary>
@@ -41,6 +41,11 @@
         [ConfigurationProperty(MonthKey, IsRequired = true)]
         public string SerializedMonth => base[MonthKey] as string;
 
+        /// <summary>
+        /// Gets the day of the month to be triggered at.
+        /// </summary>
+        [ConfigurationProperty(WeeklyScheduleItem.DayKey, DefaultValue = 1, IsRequired = true)]
+        public int Day => (int) base[WeeklyScheduleItem.DayKey];
         #endregion
 
         #region Public Methods

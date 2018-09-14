@@ -2,7 +2,10 @@ namespace ScheduledWorker.App
 {
     using System;
     using System.Collections.Generic;
+    using Library;
     using Library.Contracts.Logging;
+    using Library.Contracts.Schedule;
+    using Library.Core.Schedule;
     using Library.Logging;
 
     /// <summary>
@@ -28,17 +31,30 @@ namespace ScheduledWorker.App
         /// <param name="args">Not used. Could be null</param>
         static void Main(string[] args)
         {
-            ILogger logger = new ConsoleLogger();
+            ILogger logger = LogManager.Default;
             try
             {
 
                 logger.Info("Starting main");
                 logger.Debug("Exe located at '{0}'", AppDomain.CurrentDomain.BaseDirectory);
 
+                // roadmap;
+                // * Create object POCO models to allow programmatic scheule specification (rather than loading from config only)
+                // * Create component to determine if a schedule has been triggered
+                // * Unit test the hell out of everything
+                // * Verify that the scheduler is working end-to-end
+                // * Create object instantiation mechanism (currently limited to blank constructors only)
+                // * Unit test the above and retest
+
+
                 // load the custom configuration
-                //ScheduleManager scheduleManager = new ScheduleManager();
-                //scheduleManager.Initialize();
-                //scheduleManager.Start();
+                //var configLoader = new ConfigLoader();
+                //var scheduleConfig = configLoader.LoadDefault();
+                //var schedule = scheduleConfig.ToSchedule();
+                ISchedule schedule = (ISchedule) null;
+                var momentProvider = new UtcMomentProvider();
+                ScheduleManager scheduleManager = new ScheduleManager(logger, schedule, momentProvider);
+                scheduleManager.Start();
 
                 if (Environment.UserInteractive)
                 {

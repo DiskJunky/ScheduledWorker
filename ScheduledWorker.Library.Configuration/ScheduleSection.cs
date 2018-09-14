@@ -2,13 +2,15 @@
 {
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Linq;
     using Contracts;
     using Contracts.Schedule;
+    using Core.Schedule;
 
     /// <summary>
     /// This class determines the configuration section for a schedule.
     /// </summary>
-    public class ScheduleSection : ConfigurationSection//, IScheduleConfigurationSection
+    public class ScheduleSection : ConfigurationSection
     {
         #region Configuration Section Keys
         /// <summary>
@@ -72,8 +74,17 @@
         /// </summary>
         [ConfigurationProperty(RunNowScheduleSectionKey)]
         public RunNowScheduleCollection RunNow => (RunNowScheduleCollection)base[RunNowScheduleSectionKey];
+        #endregion
 
-        //IList<IScheduleItem> IScheduleConfigurationSection.Daily => throw new System.NotImplementedException();
+        #region Public Methods        
+        /// <summary>
+        /// Converted the loaded configuration into a schedule instance.
+        /// </summary>
+        /// <returns>A new <see cref="ISchedule"/> instance based on the loaded configuration.</returns>
+        public ISchedule ToSchedule()
+        {
+            return new Schedule(Daily.ToArray(), Weekly.ToArray(), Monthly.ToArray(), RunNow.ToArray());
+        }
         #endregion
     }
 }

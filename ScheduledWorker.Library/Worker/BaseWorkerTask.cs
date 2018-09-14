@@ -24,7 +24,7 @@ namespace ScheduledWorker.Library.Worker
         /// </summary>
         protected BaseWorkerTask()
         {
-            _logger = new NoLogger();
+            _logger = LogManager.None;
         }
 
         /// <summary>

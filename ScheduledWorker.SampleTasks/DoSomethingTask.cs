@@ -11,6 +11,12 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="DoSomethingTask"/> class.
         /// </summary>
+        public DoSomethingTask()
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DoSomethingTask"/> class.
+        /// </summary>
         /// <param name="logger">The logger to use for logging.</param>
         public DoSomethingTask(ILogger logger) : base(logger)
         {
