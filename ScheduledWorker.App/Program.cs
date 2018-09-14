@@ -2,8 +2,10 @@ namespace ScheduledWorker.App
 {
     using System;
     using System.Collections.Generic;
+    using Library;
     using Library.Configuration;
     using Library.Contracts.Logging;
+    using Library.Core.Schedule;
     using Library.Logging;
 
     /// <summary>
@@ -38,10 +40,11 @@ namespace ScheduledWorker.App
 
                 // load the custom configuration
                 var configLoader = new ConfigLoader();
-                var schedule = configLoader.LoadDefault();
-                //ScheduleManager scheduleManager = new ScheduleManager();
-                //scheduleManager.Initialize();
-                //scheduleManager.Start();
+                var scheduleConfig = configLoader.LoadDefault();
+                var schedule = scheduleConfig.ToSchedule();
+                var momentProvider = new UtcMomentProvider();
+                ScheduleManager scheduleManager = new ScheduleManager(logger, schedule, momentProvider);
+                scheduleManager.Start();
 
                 if (Environment.UserInteractive)
                 {
