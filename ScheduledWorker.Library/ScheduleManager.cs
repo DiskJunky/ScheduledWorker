@@ -2,11 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
-    using System.Threading;
-    using Configuration;
+    using Contracts;
     using Contracts.Logging;
     using Contracts.Schedule;
+    using Contracts.Worker;
     using Logging;
 
     /// <summary>
@@ -33,22 +32,35 @@
         /// The logger instance to use for logging anything.
         /// </summary>
         private readonly ILogger _logger;
+
+        /// <summary>
+        /// Holds a reference to the component that will return particular moments in time to check
+        /// against the schedule.
+        /// </summary>
+        private readonly IMomentProvider _momentProvider;
         #endregion
 
         #region Lifetime Management        
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleManager"/> class.
         /// </summary>
-        public ScheduleManager()
+        /// <param name="schedule">The instance of the schedule on which to run tasks.</param>
+        /// <param name="momentProvider">The component use to return the current moment in time.</param>
+        public ScheduleManager(ISchedule schedule, IMomentProvider momentProvider)
         {
             _logger = new NoLogger();
+            Schedule = schedule;
+            _momentProvider = momentProvider;
         }
 
         /// <summary>
         /// This instantiates the object.
         /// </summary>
         /// <param name="logger">The logging instance to use for logging.</param>
-        public ScheduleManager(ILogger logger)
+        /// <param name="schedule">The instance of the schedule on which to run tasks.</param>
+        /// <param name="momentProvider">The component use to return the current moment in time.</param>
+        public ScheduleManager(ILogger logger, ISchedule schedule, IMomentProvider momentProvider)
+            : this(schedule, momentProvider)
         {
             _logger = logger;
         }
@@ -63,21 +75,11 @@
         #endregion
 
         #region Public Methods
-
-        ISchedule IScheduleManager.Schedule { get; }
-
         /// <summary>
         /// This initializes the schedule and loads the details from the application's configuration.
         /// </summary>
         public void Initialize()
         {
-            System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            Schedule = (ISchedule)config.Sections[ScheduleSection.ScheduleSectionKey];
-        }
-
-        bool IScheduleManager.RunTask(IScheduleItem scheduledItem, bool throwExceptions)
-        {
-            return RunTask(scheduledItem, throwExceptions);
         }
 
         /// <summary>
@@ -112,7 +114,7 @@
 
                 // this is deliberately broken to highlight attention. The line below
                 // is invalid because the LastRun time should be managed by the scheduler.
-                scheduledItem.LastRunUtc = DateTime.UtcNow;
+                scheduledItem.LastRun = _momentProvider.GetCurrent();
                 success = ((IWorkerTask) scheduledItem.Task).DoWork();
             }
             catch (Exception ex)
@@ -143,7 +145,7 @@
             while (_canRun)
             {
                 _logger.Debug("Starting scheduled task check...");
-                DateTime loopStartTick = DateTime.Now;
+                DateTime loopStartTick = DateTime.UtcNow;
 
                 // TODO: code seem to be an out of date copy... need to investigate correct classes that
                 //       should be referenced to get this working...
@@ -156,7 +158,7 @@
                 //// any action may have taken longer than the interval to run. Calculate how long
                 //// in milliseconds we need to sleep the current thread for
                 //_logger.Debug("Finished scheduled task check.");
-                //TimeSpan executeTime = DateTime.Now.Subtract(loopStartTick);
+                //TimeSpan executeTime = DateTime.UtcNow.Subtract(loopStartTick);
                 //if (executeTime.Seconds < Schedule.Interval)
                 //{
                 //    int sleepMilliseconds = (Schedule.Interval*1000) - executeTime.Milliseconds;
@@ -183,26 +185,26 @@
         /// Checks the scheduled items should be run and runs them if so.
         /// </summary>
         /// <param name="scheduledItems">The scheduled items to check.</param>
-        private void CheckScheduledItems(IEnumerable<BaseScheduleItem> scheduledItems)
+        private void CheckScheduledItems(/*IEnumerable<BaseScheduleItem> scheduledItems*/)
         {
-            string typeName = scheduledItems.GetType().Name;
-            _logger.Trace("Checking scheduled items in [{0}]...", typeName);
-            foreach (BaseScheduleItem item in scheduledItems)
-            {
-                RunIfTriggered(item);
-            }
-            _logger.Trace("Check for [{0}] scheduled items complete.", typeName);
+            //string typeName = scheduledItems.GetType().Name;
+            //_logger.Trace("Checking scheduled items in [{0}]...", typeName);
+            //foreach (BaseScheduleItem item in scheduledItems)
+            //{
+            //    RunIfTriggered(item);
+            //}
+            //_logger.Trace("Check for [{0}] scheduled items complete.", typeName);
         }
 
         /// <summary>
         /// Runs the specified scheduled item if it's due to be triggered.
         /// </summary>
         /// <param name="scheduledItem">The scheduled item.</param>
-        private void RunIfTriggered(BaseScheduleItem scheduledItem)
+        private void RunIfTriggered(IScheduleItem scheduledItem)
         {
             // TODO: locate correct code for identifying the interval...
-
-            //if (scheduledItem.ShouldRun(DateTime.Now, Schedule.Interval))
+            DateTime moment = _momentProvider.GetCurrent();
+            //if (scheduledItem.ShouldRun(moment, Schedule.Interval))
             //{
             //    RunTask(scheduledItem);
             //}

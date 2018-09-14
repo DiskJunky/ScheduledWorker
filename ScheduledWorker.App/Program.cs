@@ -28,11 +28,11 @@ namespace ScheduledWorker.App
         /// <param name="args">Not used. Could be null</param>
         static void Main(string[] args)
         {
-            ILogger logger = new NoLogger();
+            ILogger logger = new ConsoleLogger();
             try
             {
 
-                logger.Info("Starting main at {0}", DateTime.Now);
+                logger.Info("Starting main");
                 logger.Debug("Exe located at '{0}'", AppDomain.CurrentDomain.BaseDirectory);
 
                 // load the custom configuration
@@ -40,8 +40,11 @@ namespace ScheduledWorker.App
                 //scheduleManager.Initialize();
                 //scheduleManager.Start();
 
-                Console.WriteLine("\r\nPress any key to exit");
-                Console.ReadKey();
+                if (Environment.UserInteractive)
+                {
+                    Console.WriteLine("\r\nPress any key to exit");
+                    Console.ReadKey();
+                }
 
                 // try and load the settings and schedule configuration
                 //Settings settings = Settings.Default;
@@ -68,13 +71,12 @@ namespace ScheduledWorker.App
             }
             catch (Exception ex)
             {
-                // log and exit the program
-                string message =
-                    string.Format("There was an unexpected problem while running the Scheduled Worker process.\r\nError: {0}",
-                                  ex.Message);
-                logger.Fatal(ex, message);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
+                logger.Fatal(ex, "There was an unexpected problem while running the Scheduled Worker process");
+                if (Environment.UserInteractive)
+                {
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                }
             }
         }
         #endregion

@@ -41,40 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\BaseScheduleCollection.cs" />
-    <Compile Include="Configuration\BaseScheduleItem.cs" />
-    <Compile Include="Configuration\Daily\DailyScheduleCollection.cs" />
-    <Compile Include="Configuration\Daily\DailyScheduleItem.cs" />
-    <Compile Include="Configuration\Monthly\MonthlyScheduleCollection.cs" />
-    <Compile Include="Configuration\Monthly\MonthlyScheduleItem.cs" />
-    <Compile Include="Configuration\RunNow\RunNowScheduleCollection.cs" />
-    <Compile Include="Configuration\RunNow\RunNowScheduleItem.cs" />
-    <Compile Include="Configuration\ScheduleSection.cs" />
-    <Compile Include="Configuration\Weekly\WeeklyScheduleCollection.cs" />
-    <Compile Include="Configuration\Weekly\WeeklyScheduleItem.cs" />
-    <Compile Include="Configuration\WorkerTaskConverter.cs" />
-    <Compile Include="Contracts\Schedule\IDailyScheduleItem.cs" />
-    <Compile Include="Contracts\Intervals\IInterval.cs" />
-    <Compile Include="Contracts\Schedule\IMonthlyScheduleItem.cs" />
-    <Compile Include="Contracts\Schedule\IRunNowScheduleItem.cs" />
-    <Compile Include="Contracts\Schedule\ISchedule.cs" />
-    <Compile Include="Contracts\Schedule\IScheduleSettings.cs" />
-    <Compile Include="Contracts\Schedule\IWeeklyScheduleItem.cs" />
-    <Compile Include="Contracts\WorkerTaskEventArgs.cs" />
     <Compile Include="Core\Intervals\BaseInterval.cs" />
     <Compile Include="Core\Intervals\MinuteInterval.cs" />
     <Compile Include="Core\Intervals\SecondInterval.cs" />
-    <Compile Include="IScheduleManager.cs" />
-    <Compile Include="Contracts\Month.cs" />
-    <Compile Include="Contracts\Schedule\IScheduleItem.cs" />
-    <Compile Include="Contracts\Schedule\IWorkerTask.cs" />
+    <Compile Include="Core\Schedule\BaseMomentProvider.cs" />
+    <Compile Include="Core\Schedule\NowMomentProvider.cs" />
+    <Compile Include="Core\Schedule\UtcMomentProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScheduleManager.cs" />
     <Compile Include="Worker\BaseWorkerTask.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Schedule\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ScheduledWorker.Library.Contracts\ScheduledWorker.Library.Contracts.csproj">
       <Project>{58345577-3051-44e1-8821-064440d2319b}</Project>
