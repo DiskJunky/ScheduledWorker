@@ -62,6 +62,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScheduledWorker.Library.Contracts\ScheduledWorker.Library.Contracts.csproj">
+      <Project>{58345577-3051-44e1-8821-064440d2319b}</Project>
+      <Name>ScheduledWorker.Library.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScheduledWorker.Library.Mocks\ScheduledWorker.Library.Mocks.csproj">
       <Project>{D4606218-A2B2-4729-9D0C-686C29E7BAA8}</Project>
       <Name>ScheduledWorker.Library.Mocks</Name>
