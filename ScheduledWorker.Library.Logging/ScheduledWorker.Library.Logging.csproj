@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ProjectGuid>{DBA1350F-024B-41AF-8645-56C158D13703}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
