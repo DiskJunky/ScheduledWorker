@@ -8,8 +8,8 @@
     using System.Reflection;
     using Contracts;
     using Contracts.Logging;
-    using Contracts.Schedule;
     using Contracts.Worker;
+    using Logging;
 
     /// <summary>
     /// This class is used to help convert a configuration setting value into a concrete
@@ -22,6 +22,30 @@
         /// Holds a reference to the logging instance.
         /// </summary>
         private readonly ILogger _logger;
+        #endregion
+
+        #region Constructors        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WorkerTaskConverter"/> class.
+        /// </summary>
+        public WorkerTaskConverter()
+        {
+            _logger = LogManager.Default;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WorkerTaskConverter"/> class.
+        /// </summary>
+        /// <param name="logger">The logger instance to use for logging.</param>
+        public WorkerTaskConverter(ILogger logger)
+        {
+            if (logger == null)
+            {
+                // default to console logger
+                logger = LogManager.Default;
+            }
+            _logger = logger;
+        }
         #endregion
 
         #region TypeConverter Overrides

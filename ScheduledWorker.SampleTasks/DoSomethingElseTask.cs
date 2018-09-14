@@ -8,6 +8,10 @@
     /// </summary>
     public class DoSomethingElseTask : BaseWorkerTask
     {
+        public DoSomethingElseTask()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DoSomethingElseTask"/> class.
         /// </summary>

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="BaseScheduleCollection.cs" />
     <Compile Include="BaseScheduleItem.cs" />
+    <Compile Include="ConfigLoader.cs" />
     <Compile Include="Daily\DailyScheduleCollection.cs" />
     <Compile Include="Daily\DailyScheduleItem.cs" />
     <Compile Include="Monthly\MonthlyScheduleCollection.cs" />
@@ -60,6 +61,14 @@
     <ProjectReference Include="..\ScheduledWorker.Library.Contracts\ScheduledWorker.Library.Contracts.csproj">
       <Project>{58345577-3051-44e1-8821-064440d2319b}</Project>
       <Name>ScheduledWorker.Library.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScheduledWorker.Library.Logging\ScheduledWorker.Library.Logging.csproj">
+      <Project>{DBA1350F-024B-41AF-8645-56C158D13703}</Project>
+      <Name>ScheduledWorker.Library.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScheduledWorker.Library\ScheduledWorker.Library.csproj">
+      <Project>{C77D3782-A3CF-4FE1-AFF0-E0C98E218105}</Project>
+      <Name>ScheduledWorker.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

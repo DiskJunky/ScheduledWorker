@@ -48,7 +48,7 @@
         /// <param name="momentProvider">The component use to return the current moment in time.</param>
         public ScheduleManager(ISchedule schedule, IMomentProvider momentProvider)
         {
-            _logger = new NoLogger();
+            _logger = LogManager.None;
             Schedule = schedule;
             _momentProvider = momentProvider;
         }

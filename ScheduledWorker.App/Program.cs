@@ -2,6 +2,7 @@ namespace ScheduledWorker.App
 {
     using System;
     using System.Collections.Generic;
+    using Library.Configuration;
     using Library.Contracts.Logging;
     using Library.Logging;
 
@@ -28,7 +29,7 @@ namespace ScheduledWorker.App
         /// <param name="args">Not used. Could be null</param>
         static void Main(string[] args)
         {
-            ILogger logger = new ConsoleLogger();
+            ILogger logger = LogManager.Default;
             try
             {
 
@@ -36,6 +37,8 @@ namespace ScheduledWorker.App
                 logger.Debug("Exe located at '{0}'", AppDomain.CurrentDomain.BaseDirectory);
 
                 // load the custom configuration
+                var configLoader = new ConfigLoader();
+                var schedule = configLoader.LoadDefault();
                 //ScheduleManager scheduleManager = new ScheduleManager();
                 //scheduleManager.Initialize();
                 //scheduleManager.Start();

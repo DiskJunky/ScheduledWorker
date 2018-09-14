@@ -8,7 +8,7 @@
     /// <summary>
     /// This class determines the configuration section for a schedule.
     /// </summary>
-    public class ScheduleSection : ConfigurationSection//, IScheduleConfigurationSection
+    public class ScheduleSection : ConfigurationSection
     {
         #region Configuration Section Keys
         /// <summary>
@@ -72,8 +72,6 @@
         /// </summary>
         [ConfigurationProperty(RunNowScheduleSectionKey)]
         public RunNowScheduleCollection RunNow => (RunNowScheduleCollection)base[RunNowScheduleSectionKey];
-
-        //IList<IScheduleItem> IScheduleConfigurationSection.Daily => throw new System.NotImplementedException();
         #endregion
     }
 }
