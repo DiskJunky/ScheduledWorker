@@ -34,8 +34,6 @@
         [TypeConverter(typeof(WorkerTaskConverter))]
         public IWorkerTask Task => (IWorkerTask)base[TaskTypePropertyKey];
 
-        public DateTime LastRunUtc { get; set; }
-
         /// <summary>
         /// Gets or sets the date/time that the task was last run.
         /// </summary>

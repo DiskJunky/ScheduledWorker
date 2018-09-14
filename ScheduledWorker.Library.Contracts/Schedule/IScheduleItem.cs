@@ -15,8 +15,8 @@ namespace ScheduledWorker.Library.Contracts.Schedule
         Type Task { get; }
 
         /// <summary>
-        /// Gets or sets the UTC date/time that the task was last run.
+        /// Gets or sets the date/time that the task was last run.
         /// </summary>
-        DateTime LastRunUtc { get; set; }
+        DateTime LastRun { get; set; }
     }
 }
