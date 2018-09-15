@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Contracts;
     using Contracts.Logging;
+    using Contracts.MomentProviders;
     using Contracts.Schedule;
     using Contracts.Worker;
     using Logging;

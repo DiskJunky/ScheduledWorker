@@ -1,11 +1,11 @@
-﻿namespace ScheduledWorker.Library.Core.Schedule
+﻿namespace ScheduledWorker.Library.Core.MomentProviders
 {
     using System;
 
     /// <summary>
     /// This class always returns a moment of <see cref="DateTime.Now"/>.
     /// </summary>
-    /// <seealso cref="ScheduledWorker.Library.Core.Schedule.BaseMomentProvider" />
+    /// <seealso cref="BaseMomentProvider" />
     public class NowMomentProvider : BaseMomentProvider
     {
         /// <summary>

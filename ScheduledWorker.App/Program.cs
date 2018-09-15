@@ -4,6 +4,7 @@ namespace ScheduledWorker.App
     using Library;
     using Library.Contracts.Logging;
     using Library.Contracts.Schedule;
+    using Library.Core.MomentProviders;
     using Library.Core.Schedule;
     using Library.Logging;
 

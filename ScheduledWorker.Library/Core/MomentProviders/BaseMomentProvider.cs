@@ -1,12 +1,13 @@
-﻿namespace ScheduledWorker.Library.Core.Schedule
+﻿namespace ScheduledWorker.Library.Core.MomentProviders
 {
     using System;
+    using Contracts.MomentProviders;
     using Contracts.Schedule;
 
     /// <summary>
     /// This base class provides most of the wrapping necessary to create a basic moment provider.
     /// </summary>
-    /// <seealso cref="ScheduledWorker.Library.Contracts.Schedule.IMomentProvider" />
+    /// <seealso cref="IMomentProvider" />
     public abstract class BaseMomentProvider : IMomentProvider
     {
         private readonly Func<DateTime> _getMoment;

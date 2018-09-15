@@ -5,10 +5,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ScheduledWorker.Library.Contracts\ScheduledWorker.Library.Contracts.csproj">
       <Project>{58345577-3051-44E1-8821-064440D2319B}</Project>
       <Name>ScheduledWorker.Library.Contracts</Name>

@@ -1,4 +1,4 @@
-﻿namespace ScheduledWorker.Library.Contracts.Schedule
+﻿namespace ScheduledWorker.Library.Contracts.MomentProviders
 {
     using System;
 

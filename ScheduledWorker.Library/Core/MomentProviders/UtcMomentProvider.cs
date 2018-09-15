@@ -1,11 +1,12 @@
-﻿namespace ScheduledWorker.Library.Core.Schedule
+﻿namespace ScheduledWorker.Library.Core.MomentProviders
 {
     using System;
+    using Contracts.MomentProviders;
 
     /// <summary>
     /// This always returns the current moment as <see cref="DateTime.UtcNow"/>.
     /// </summary>
-    /// <seealso cref="ScheduledWorker.Library.Contracts.Schedule.IMomentProvider" />
+    /// <seealso cref="IMomentProvider" />
     public class UtcMomentProvider : BaseMomentProvider
     {
         /// <summary>
